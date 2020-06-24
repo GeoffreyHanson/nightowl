@@ -4,10 +4,12 @@ import React from 'react';
 const CafeList = (props) => {
   const { children } = props;
   return (
-    <ul className="List">
+    <ul className="CafeList">
       <li>
         {children}
       </li>
     </ul>
   );
 };
+
+export default CafeList;
