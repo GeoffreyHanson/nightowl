@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="App">
       <Title />
-      <SearchBar className="SearchBar" />
+      <SearchBar />
       <CafeList />
     </div>
   );
