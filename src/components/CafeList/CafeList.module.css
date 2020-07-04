@@ -1,0 +1,14 @@
+table {
+  /* text-align: center; */
+  margin: 0 auto;
+  border: solid lightgray;
+  padding: 5px;
+  border-radius: 20px;
+  width: 500px
+}
+
+td {
+  text-align: center;
+}
+
+
