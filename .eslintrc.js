@@ -3,6 +3,7 @@ module.exports = {
         "browser": true,
         "es6": true
     },
+    "parser" : "babel-eslint",
     "extends": [
         "plugin:react/recommended",
         "airbnb"
@@ -24,6 +25,7 @@ module.exports = {
     "rules": {
         'react/jsx-filename-extension': 0,
         "indent": ["error", 2],
+        "jsx-a11y/control-has-associated-label": 0
         // "global-require": 1,
     }
 };
