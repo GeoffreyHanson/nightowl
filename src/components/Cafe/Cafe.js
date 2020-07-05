@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+// TODO: Destructure props in argument when finalized
 const Cafe = (props) => {
   const { cafe } = props;
   const { name, distance, close } = cafe;
