@@ -4,21 +4,23 @@ import './CafeList.module.css';
 
 // Displaying a list of cafe names
 // The array fed to this component should already be sorted
-const CafeList = () => {
-  const cafes = [
-    {
-      id: 1,
-      name: 'Spyhouse',
-      distance: 2,
-      close: '11:00pm',
-    },
-    {
-      id: 2,
-      name: 'Dogwood',
-      distance: 1,
-      close: '8:00pm',
-    },
-  ];
+const CafeList = (props) => {
+  const { cafes } = props;
+
+  // const cafes = [
+  //   {
+  //     id: 1,
+  //     name: 'Spyhouse',
+  //     distance: 2,
+  //     close: '11:00pm',
+  //   },
+  //   {
+  //     id: 2,
+  //     name: 'Dogwood',
+  //     distance: 1,
+  //     close: '8:00pm',
+  //   },
+  // ];
 
   return (
     <table>
