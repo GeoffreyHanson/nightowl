@@ -5,7 +5,7 @@ const authorization = { headers: { Authorization: `Bearer ${apiKey}` } };
 const Yelp = {
   async search(location) {
     // Coffee or coffee shop?
-    const endpoint = `https://api.yelp.com/v3/businesses/search?term=coffee&location=${location}`;
+    const endpoint = `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=coffee&location=${location}`;
 
     try {
       const response = await fetch(endpoint, authorization);

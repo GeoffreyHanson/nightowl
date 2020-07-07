@@ -2,15 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // TODO: Destructure props in argument when finalized
-const Cafe = (props) => {
-  const { cafe } = props;
-  const { name, distance, close } = cafe;
+const Cafe = ({ cafe: { name, distance, close } }) => {
+  // const { cafe } = props;
+  // const { name, distance, close } = cafe;
+
+  // Converting to miles
+  const distanceMiles = (distance * 0.000621371);
+  // Rounding to two decimal places
+  const distanceShortened = (Math.round(distanceMiles * 100)) / 100;
+
   return (
     <tr>
       <td>{name}</td>
       <td>
-        {distance}
-        mi
+        {distanceShortened}
       </td>
       <td>{close}</td>
     </tr>
