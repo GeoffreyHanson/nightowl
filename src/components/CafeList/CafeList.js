@@ -19,4 +19,5 @@ const CafeList = ({ cafes }) => (
     </tbody>
   </table>
 );
+
 export default CafeList;
