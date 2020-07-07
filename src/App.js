@@ -2,45 +2,25 @@ import React, { useState } from 'react';
 import Title from './components/Title/Title';
 import SearchBar from './components/SearchBar/SearchBar';
 import CafeList from './components/CafeList/CafeList';
+import Yelp from './utilities/Yelp';
 import './App.css';
 
-function App() {
-  const [cafes, setCafes] = useState([
-    {
-      id: 1,
-      name: 'Spyhouse',
-      distance: 2,
-      close: '11:00pm',
-    },
-    {
-      id: 2,
-      name: 'Dogwood',
-      distance: 1,
-      close: '8:00pm',
-    },
-  ]);
+const App = () => {
+  const [cafes, setCafes] = useState([]);
 
-  // const cafes = [
-  //   {
-  //     id: 1,
-  //     name: 'Spyhouse',
-  //     distance: 2,
-  //     close: '11:00pm',
-  //   },
-  //   {
-  //     id: 2,
-  //     name: 'Dogwood',
-  //     distance: 1,
-  //     close: '8:00pm',
-  //   },
-  // ];
+  const searchYelp = (location) => {
+    Yelp.search(location).then((cafe) => {
+      setCafes(cafe);
+    });
+  };
+
   return (
     <div className="App">
       <Title />
-      <SearchBar />
+      <SearchBar searchYelp={searchYelp} />
       <CafeList cafes={cafes} />
     </div>
   );
-}
+};
 
 export default App;

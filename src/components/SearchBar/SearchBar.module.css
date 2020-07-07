@@ -7,20 +7,29 @@
 .LocationInput {
   box-sizing: border-box;
   background-color: #071022;
-  color: white;
+  color: lightgray;
+  margin-top: -10px;
   border: 2px solid lightgray;
   padding: 8px;
   border-radius: 20px;
   width: 250px;
+  text-align: center;
 }
 
 .SubmitButton {
   margin: 20px;
   background-color: lightgray;
   box-sizing: border-box;
-  border: solid lightgray;
-  border-radius: 20px;
+  border: 2px solid lightgray;
+  padding: 5px;
+  border-radius: 14px;
   font-size: 17px;
   /* padding: 8px; */
   /* width: 100px; */
+}
+
+.SubmitButton:hover {
+  background-color: #071022;
+  color: lightgray;
+  transition-duration: 0.25s;
 }
