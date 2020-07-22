@@ -1,10 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 // TODO: Destructure props in argument when finalized
-const Cafe = ({ cafe: { name, distance, close } }) => {
-  // const { cafe } = props;
-  // const { name, distance, close } = cafe;
+const Cafe = (props) => {
+  const { cafe } = props;
+  const { name, distance, closingTime } = cafe;
+  // console.log(name);
+  // console.log(closingTime);
 
   // Converting to miles
   const distanceMiles = (distance * 0.000621371);
@@ -17,27 +19,28 @@ const Cafe = ({ cafe: { name, distance, close } }) => {
       <td>
         {distanceShortened}
       </td>
-      <td>{close}</td>
+      <td>{closingTime}</td>
     </tr>
   );
 };
 
+
+// Cafe.propTypes = {
+//   // key: PropTypes.number,
+//   cafe: PropTypes.shape({
+//     name: PropTypes.string,
+//     distance: PropTypes.number,
+//     close: PropTypes.string,
+//   }),
+// };
+
+// Cafe.defaultProps = {
+//   // key: PropTypes.number,
+//   cafe: PropTypes.shape({
+//     name: 'Name of Cafe',
+//     distance: 0,
+//     close: '00:00',
+//   }),
+// };
+
 export default Cafe;
-
-Cafe.propTypes = {
-  // key: PropTypes.number,
-  cafe: PropTypes.shape({
-    name: PropTypes.string,
-    distance: PropTypes.number,
-    close: PropTypes.string,
-  }),
-};
-
-Cafe.defaultProps = {
-  // key: PropTypes.number,
-  cafe: PropTypes.shape({
-    name: 'Name of Cafe',
-    distance: 0,
-    close: '00:00',
-  }),
-};
