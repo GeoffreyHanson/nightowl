@@ -8,19 +8,37 @@ import './App.css';
 const App = () => {
   const [cafes, setCafes] = useState([]);
 
-  useEffect(() => {
-    if (cafes.length !== 0) {
-      const updatedCafes = cafes.map((cafe) => {
-        cafe.overnight = false;
-        cafe.closingTime = '1200';
-        return cafe;
-      });
-      console.log('Updated...');
-      console.log(updatedCafes);
-      // Currently causes an infinite loop...
-      setCafes(updatedCafes);
-    }
-  }, [cafes]);
+
+  // Should update when cafes[0].closingTime changes
+  // if cafes[0].closingTime, then
+  // function handleChange() {
+  //   // if (cafes[0].closingTime) {
+  //   const updatedCafes = cafes.map((cafe) => {
+  //     cafe.overnight = false;
+  //     cafe.closingTime = '1200';
+  //     return cafe;
+  //   });
+  //   console.log('Updated...');
+  //   console.log(updatedCafes);
+  //   // Currently causes an infinite loop...
+  //   setCafes(updatedCafes);
+  //   // }
+  // }
+
+
+  // useEffect(() => {
+  //   if (cafes.length !== 0) {
+  //     const updatedCafes = cafes.map((cafe) => {
+  //       cafe.overnight = false;
+  //       cafe.closingTime = '1200';
+  //       return cafe;
+  //     });
+  //     console.log('Updated...');
+  //     console.log(updatedCafes);
+  //     // Currently causes an infinite loop...
+  //     setCafes(updatedCafes);
+  //   }
+  // }, []);
 
   // useEffect(() => {
   //   if (cafes.length !== 0) {
@@ -36,6 +54,7 @@ const App = () => {
   //   }
   // }, [cafes]);
 
+
   const searchYelp = (location) => {
     Yelp.search(location).then((cafeList) => {
       setCafes(cafeList);
@@ -48,7 +67,10 @@ const App = () => {
     <div className="App">
       <Title />
       <SearchBar searchYelp={searchYelp} />
-      <CafeList cafes={cafes} />
+      <CafeList
+        cafes={cafes}
+        setCafes={setCafes}
+      />
     </div>
   );
 };

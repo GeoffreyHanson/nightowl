@@ -3,11 +3,38 @@ const authorization = { headers: { Authorization: `Bearer ${apiKey}` } };
 
 // Search for businesses first, then re-search each business for hours
 const Yelp = {
+  // search() {
+  //   // Coffee or coffee shop?
+  //   // TEMP
+  //   const location = 'minneapolis';
+  //   const endpoint = `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=coffee&location=${location}&limit=5`;
+
+  //   // Fetching response
+  //   fetch(endpoint, authorization)
+  //     .then((response) => response.json())
+  //     .then((business) => ({
+  //       id: business.id,
+  //       name: business.name,
+  //       distance: business.distance,
+  //     }));
+
+  //   // If there are businesses in the response,
+  //   // if (jsonResponse.businesses) {
+  //   //   // Map each business
+  //   //   // TODO this should use the next method
+  //   //   return jsonResponse.businesses.map((business) => ({
+  //   //     id: business.id,
+  //   //     name: business.name,
+  //   //     distance: business.distance,
+  //   //   }));
+  //   // }
+  // },
+
   async search() {
     // Coffee or coffee shop?
     // TEMP
     const location = 'minneapolis';
-    const endpoint = `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=coffee&location=${location}&limit=5`;
+    const endpoint = `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=coffee&location=${location}&limit=3`;
 
     try {
       // Fetching response
