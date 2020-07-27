@@ -57,7 +57,29 @@ const App = () => {
 
   const searchYelp = (location) => {
     Yelp.search(location).then((cafeList) => {
-      setCafes(cafeList);
+      const cafeArr = [];
+      cafeList.forEach((cafe) => {
+        Yelp.details(cafe.id).then((details) => {
+          // cafe.overnight = details.overnight;
+          // cafe.closingTime = details.closingTime;
+          cafe = {
+            ...cafe,
+            overnight: details.overnight,
+            closingTime: details.closingTime,
+          };
+          // console.dir(cafeContainer);
+          cafeArr.push(cafe);
+          // return cafe;
+          // setCafes(where: cafe.id)
+          // How do I add container to the cafe
+        });
+        // .then((result) => result);
+        // return container;
+        // console.dir(detailedCafe);
+      });
+      console.table(cafeArr);
+      // console.log(cafeList);
+      // setCafes(cafeList);
     });
     // For each cafe in cafes
   };

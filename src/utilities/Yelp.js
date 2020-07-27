@@ -36,6 +36,33 @@ const Yelp = {
     const location = 'minneapolis';
     const endpoint = `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=coffee&location=${location}&limit=3`;
 
+    // fetch(endpoint, authorization)
+    //   .then((res) => res.json())
+    //   .then((result) => {
+    //     // result.businesses.map((business) => {
+    //     //   console.log(business);
+    //     // });
+    //     const retrievedCafes = result.businesses.map((business) => (
+    //       {
+    //         id: business.id,
+    //         name: business.name,
+    //         distance: business.distance,
+    //       }
+    //       // fetch(businessIdEndpoint, authorization)
+    //       //   .then((res))
+    //     ));
+
+    //     // console.log(retrievedCafes);
+    //     // setCafes(retrievedCafes);
+    //     // console.log(cafes);
+    //     // console.log(isLoaded);
+    //     // setIsLoaded(true);
+    //     return retrievedCafes;
+    //   }, (error) => {
+    //     // setIsLoaded(true);
+    //     // setError(error);
+    //   });
+
     try {
       // Fetching response
       const response = await fetch(endpoint, authorization);
