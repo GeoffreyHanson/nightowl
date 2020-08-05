@@ -3,6 +3,7 @@ import Title from './components/Title/Title';
 import SearchBar from './components/SearchBar/SearchBar';
 import CafeList from './components/CafeList/CafeList';
 import Yelp from './utilities/Yelp';
+import TimeTranslation from './utilities/TimeTranslation';
 import './App.css';
 
 const App = () => {
@@ -40,6 +41,14 @@ const App = () => {
   function getDetails(cafesToDetail) {
     Promise.all(cafesToDetail.map((cafe) => Yelp.details(cafe.id)
       .then((cafeDetails) => {
+        // console.log(cafeDetails.closingTime);
+        // const twelveHourTime = TimeTranslation(cafeDetails.closingTime);
+
+        // const trimmed = cafeDetails.closingTime.slice(0, 2);
+
+        // const suffix = trimmed >= 12 ? 'PM' : 'AM';
+
+        // const twelveHour = (((trimmed + 11) % 12) + 1) + suffix;
         const detailedCafe = {
           ...cafe,
           closingTime: cafeDetails.closingTime,
