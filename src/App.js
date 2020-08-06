@@ -6,7 +6,7 @@ import Yelp from './utilities/Yelp';
 import './App.css';
 
 const App = () => {
-  const [error, setError] = useState(null);
+  // const [error, setError] = useState(null);
   const [cafes, setCafes] = useState([]);
 
   /* Moving cafes open overnight to the top and cafes without hours to the bottom,
@@ -66,7 +66,7 @@ const App = () => {
         }))).then((detailedCafes) => sortCafes(detailedCafes));
     } catch (detailError) {
       console.log(detailError);
-      setError(detailError);
+      // setError(detailError);
     }
   }
 
