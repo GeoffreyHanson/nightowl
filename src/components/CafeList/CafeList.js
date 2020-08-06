@@ -6,8 +6,6 @@ import './CafeList.module.css';
 // Displaying a list of cafe names
 // The array fed to this component should already be sorted
 const CafeList = ({ cafes }) => (
-  // const { cafes } = props;
-
   <table>
     <thead>
       <tr>
@@ -26,6 +24,7 @@ const CafeList = ({ cafes }) => (
     </tbody>
   </table>
 );
+
 CafeList.propTypes = {
   cafes: PropTypes.arrayOf(
     PropTypes.shape({

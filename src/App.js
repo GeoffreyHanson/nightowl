@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import Title from './components/Title/Title';
 import SearchBar from './components/SearchBar/SearchBar';
 import CafeList from './components/CafeList/CafeList';
+import LoadingAnimation from './components/LoadingAnimation/LoadingAnimation';
 import Yelp from './utilities/Yelp';
-import './App.css';
+import styles from './App.module.css';
 
 const App = () => {
   // const [error, setError] = useState(null);
   const [cafes, setCafes] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   /* Moving cafes open overnight to the top and cafes without hours to the bottom,
    with the rest in between. */
@@ -37,6 +39,8 @@ const App = () => {
     // Combinding into a new array
     const combinedCafes = [...sortedOvernight, ...sortedRemaining, ...cafesWithoutHours];
 
+    setIsLoading(false);
+
     // Sort the cafes from open latest
     setCafes(combinedCafes);
   }
@@ -48,14 +52,6 @@ const App = () => {
     // const day = new Date().getDay();
       Promise.all(cafesToDetail.map((cafe) => Yelp.details(cafe.id)
         .then((cafeDetails) => {
-        // console.log(cafeDetails.closingTime);
-        // const twelveHourTime = TimeTranslation(cafeDetails.closingTime);
-
-          // const trimmed = cafeDetails.closingTime.slice(0, 2);
-
-          // const suffix = trimmed >= 12 ? 'PM' : 'AM';
-
-          // const twelveHour = (((trimmed + 11) % 12) + 1) + suffix;
           const detailedCafe = {
             ...cafe,
             // closingTime: twelveHourTime,
@@ -65,6 +61,7 @@ const App = () => {
           return detailedCafe;
         }))).then((detailedCafes) => sortCafes(detailedCafes));
     } catch (detailError) {
+      setIsLoading(false);
       console.log(detailError);
       // setError(detailError);
     }
@@ -81,12 +78,16 @@ const App = () => {
 
 
   return (
-    <div className="App">
+    <div className={styles}>
       <Title />
-      <SearchBar searchYelp={searchYelp} />
+      <SearchBar
+        searchYelp={searchYelp}
+        setIsLoading={setIsLoading}
+      />
       <CafeList
         cafes={cafes}
       />
+      {isLoading ? <LoadingAnimation /> : null}
     </div>
   );
 };

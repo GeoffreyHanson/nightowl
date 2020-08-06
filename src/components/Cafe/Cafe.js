@@ -7,7 +7,6 @@ import TimeTranslation from '../../utilities/TimeTranslation';
 const Cafe = (props) => {
   const { cafe } = props;
   const { name, distance, closingTime } = cafe;
-  console.log(closingTime);
 
   const formattedClosing = TimeTranslation(closingTime);
 
