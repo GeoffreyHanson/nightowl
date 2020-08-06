@@ -1,28 +1,21 @@
 // Takes 24hour time and converts it into 12hour
+// Converts closing time from 24 hour to 12 hour
 const TimeTranslation = (twentyfourHour) => {
   if (twentyfourHour === undefined) {
     return twentyfourHour;
   }
 
-  const trimmed = twentyfourHour.slice(0, 2);
+  // Grabbing just the hours and minutes from e.g. '2400'
+  const hours = twentyfourHour.slice(0, 2);
+  const minutes = twentyfourHour.slice(2);
 
-  const suffix = trimmed >= 12 ? 'PM' : 'AM';
+  const suffix = hours >= 12 ? 'PM' : 'AM';
 
-  const twelveHour = (((trimmed + 11) % 12) + 1) + suffix;
+  const twelveHour = hours > 12 ? hours - 12 : hours;
 
-  console.log(twelveHour);
-  return twelveHour;
+  const translatedTime = `${twelveHour}:${minutes} ${suffix}`;
 
-  // const date = new Date(twentyfourHour);
-  // const options = {
-  //   hour: 'numeric',
-  //   minute: 'numeric',
-  //   hour12: true,
-  // };
-
-  // const twelveHour = date.toLocaleString('en-US', options);
-
-  // return twelveHour;
+  return translatedTime;
 };
 
 export default TimeTranslation;
