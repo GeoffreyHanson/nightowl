@@ -2,16 +2,17 @@ import React, { useState } from 'react';
 // import './SearchBar.module.css';
 import styles from './SearchBar.module.css';
 
-const SearchBar = (props) => {
+const SearchBar = ({ searchYelp, setIsLoading }) => {
   const [location, setLocation] = useState('');
 
   // Desctructure in props
-  const { searchYelp } = props;
 
   const handleSearch = (event) => {
+    setIsLoading(true);
     searchYelp(location);
     event.preventDefault();
   };
+
   return (
     <div className={styles.SearchBar}>
       <h2>Location</h2>

@@ -3,6 +3,10 @@ body {
   color: lightgray;
 }
 
+.center {
+  display: flex;
+  justify-content: center;
+}
 /* .App {
   display: grid;
   justify-items: center;
