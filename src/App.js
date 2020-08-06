@@ -6,20 +6,21 @@ import Yelp from './utilities/Yelp';
 import './App.css';
 
 const App = () => {
+  const [error, setError] = useState(null);
   const [cafes, setCafes] = useState([]);
 
   /* Moving cafes open overnight to the top and cafes without hours to the bottom,
    with the rest in between. */
   function sortCafes(cafesToSort) {
     // Sorting cafes from the latest open
-    const sortedCafes = cafesToSort.sort((a, b) => b.closingTime - a.closingTime);
+    // const sortedCafes = cafesToSort.sort((a, b) => b.closingTime - a.closingTime);
 
     const cafesWithoutHours = [];
     const overnightCafes = [];
     const remainingCafes = [];
 
     // Pushing to relevent arrays based on criteria
-    sortedCafes.forEach((cafe) => {
+    cafesToSort.forEach((cafe) => {
       if (cafe.closingTime === undefined) {
         cafesWithoutHours.push(cafe);
       } else if (cafe.overnight) {
@@ -29,8 +30,12 @@ const App = () => {
       }
     });
 
+    // Sort each array
+    const sortedOvernight = overnightCafes.sort((a, b) => b.closingTime - a.closingTime);
+    const sortedRemaining = remainingCafes.sort((a, b) => b.closingTime - a.closingTime);
+
     // Combinding into a new array
-    const combinedCafes = [...overnightCafes, ...remainingCafes, ...cafesWithoutHours];
+    const combinedCafes = [...sortedOvernight, ...sortedRemaining, ...cafesWithoutHours];
 
     // Sort the cafes from open latest
     setCafes(combinedCafes);
@@ -38,15 +43,31 @@ const App = () => {
 
   // Getting overnight details & closing times from Yelp
   function getDetails(cafesToDetail) {
-    Promise.all(cafesToDetail.map((cafe) => Yelp.details(cafe.id)
-      .then((cafeDetails) => {
-        const detailedCafe = {
-          ...cafe,
-          closingTime: cafeDetails.closingTime,
-          overnight: cafeDetails.overnight,
-        };
-        return detailedCafe;
-      }))).then((detailedCafes) => sortCafes(detailedCafes));
+    try {
+    // const cafesToDetail = [...undetailedCafes];
+    // const day = new Date().getDay();
+      Promise.all(cafesToDetail.map((cafe) => Yelp.details(cafe.id)
+        .then((cafeDetails) => {
+        // console.log(cafeDetails.closingTime);
+        // const twelveHourTime = TimeTranslation(cafeDetails.closingTime);
+
+          // const trimmed = cafeDetails.closingTime.slice(0, 2);
+
+          // const suffix = trimmed >= 12 ? 'PM' : 'AM';
+
+          // const twelveHour = (((trimmed + 11) % 12) + 1) + suffix;
+          const detailedCafe = {
+            ...cafe,
+            // closingTime: twelveHourTime,
+            closingTime: cafeDetails.closingTime,
+            overnight: cafeDetails.overnight,
+          };
+          return detailedCafe;
+        }))).then((detailedCafes) => sortCafes(detailedCafes));
+    } catch (detailError) {
+      console.log(detailError);
+      setError(detailError);
+    }
   }
 
 

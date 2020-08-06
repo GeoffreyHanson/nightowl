@@ -1,21 +1,15 @@
-import React, { useState } from 'react';
-import Yelp from '../../utilities/Yelp';
+import React from 'react';
+// import Yelp from '../../utilities/Yelp';
+import TimeTranslation from '../../utilities/TimeTranslation';
 // import PropTypes from 'prop-types';
 
 // TODO: Destructure props in argument when finalized
 const Cafe = (props) => {
   const { cafe } = props;
   const { name, distance, closingTime } = cafe;
-  // const [thisCafe, setThisCafe] = useState([cafe]);
-  // console.log(name);
-  // console.log(closingTime);
+  console.log(closingTime);
 
-  // Yelp.details(cafe.id).then((details) => {
-  //   cafe.overnight = details.overnight;
-  //   cafe.closingTime = details.closingTime;
-  //   console.log(cafe);
-  //   setThisCafe(cafe);
-  // });
+  const formattedClosing = TimeTranslation(closingTime);
 
   // Converting to miles
   const distanceMiles = (distance * 0.000621371);
@@ -28,7 +22,7 @@ const Cafe = (props) => {
       <td>
         {distanceShortened}
       </td>
-      <td>{closingTime}</td>
+      <td>{formattedClosing}</td>
     </tr>
   );
 };
