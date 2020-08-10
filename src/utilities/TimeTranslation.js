@@ -5,15 +5,24 @@ const TimeTranslation = (twentyfourHour) => {
     return twentyfourHour;
   }
 
-  // Grabbing just the hours and minutes from e.g. '2400'
-  const hours = twentyfourHour.slice(0, 2);
-  const minutes = twentyfourHour.slice(2);
+  // Grabbing just the hours and minutes from e.g. '2400', then parsing
+  let hours = parseInt(twentyfourHour.slice(0, 2), 10); // '24'
+
+  const minutes = twentyfourHour.slice(2); // '00'
 
   const suffix = hours >= 12 ? 'PM' : 'AM';
 
-  const twelveHour = hours > 12 ? hours - 12 : hours;
+  // Converting hours
+  if (hours > 12) {
+    hours -= 12;
+  } else if (hours === 0) {
+    hours = 12;
+  }
 
-  const translatedTime = `${twelveHour}:${minutes} ${suffix}`;
+  // Alternative mathematical conversion.
+  // hours = ((hours + 11) % 12) + 1;
+
+  const translatedTime = `${hours}:${minutes} ${suffix}`;
 
   return translatedTime;
 };
