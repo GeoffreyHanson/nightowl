@@ -5,9 +5,6 @@ const authorization = { headers: { Authorization: `Bearer ${apiKey}` } };
 const Yelp = {
 
   async search(location) {
-    // Coffee or coffee shop?
-    // TEMP
-    // const location = 'minneapolis';
     const endpoint = `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=coffee&location=${location}&limit=10`;
 
     try {
@@ -38,8 +35,8 @@ const Yelp = {
 
   async details(cafeId) {
     const endpoint = `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/${cafeId}`;
-    // TEMP: Too many requests
-    const currentDay = 0;
+    const currentDay = new Date().getDay();
+
 
     try {
       const response = await fetch(endpoint, authorization);
@@ -47,7 +44,7 @@ const Yelp = {
         const jsonResponse = await response.json();
 
         if (jsonResponse.hours) {
-          // const currentDay = new Date().getDay();
+          console.log(currentDay);
           const dayDetails = jsonResponse.hours[0].open[currentDay];
 
           const details = {
