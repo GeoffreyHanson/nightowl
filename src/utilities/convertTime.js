@@ -1,6 +1,5 @@
-// Takes 24hour time and converts it into 12hour
 // Converts closing time from 24 hour to 12 hour
-const TimeTranslation = (twentyfourHour) => {
+const convertTime = (twentyfourHour) => {
   if (twentyfourHour === undefined) {
     return twentyfourHour;
   }
@@ -22,9 +21,9 @@ const TimeTranslation = (twentyfourHour) => {
   // Alternative mathematical conversion.
   // hours = ((hours + 11) % 12) + 1;
 
-  const translatedTime = `${hours}:${minutes} ${suffix}`;
+  const convertedTime = `${hours}:${minutes} ${suffix}`;
 
-  return translatedTime;
+  return convertedTime;
 };
 
-export default TimeTranslation;
+export default convertTime;

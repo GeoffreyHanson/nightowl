@@ -5,86 +5,31 @@ import CafeList from './components/CafeList/CafeList';
 import LoadingAnimation from './components/LoadingAnimation/LoadingAnimation';
 import Yelp from './utilities/Yelp';
 import styles from './App.module.css';
+import getDetails from './utilities/getDetails';
+import sortCafes from './utilities/sortCafes';
 
 const App = () => {
   // const [error, setError] = useState(null);
   const [cafes, setCafes] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  /* Moving cafes open overnight to the top and cafes without hours to the bottom,
-   with the rest in between. */
-  function sortCafes(cafesToSort) {
-    // Sorting cafes from the latest open
-    // const sortedCafes = cafesToSort.sort((a, b) => b.closingTime - a.closingTime);
-
-    const overnightCafes = [];
-    const midnightCafes = [];
-    const remainingCafes = [];
-    const cafesWithoutHours = [];
-
-    // Pushing to relevent arrays based on criteria
-    cafesToSort.forEach((cafe) => {
-      if (cafe.closingTime === undefined) {
-        cafesWithoutHours.push(cafe);
-      } else if (cafe.overnight) {
-        overnightCafes.push(cafe);
-      } else if (cafe.closingTime < 1) {
-        // Handling shops that close at midnight '0000'
-        midnightCafes.push(cafe);
-      } else {
-        remainingCafes.push(cafe);
-      }
-    });
-
-    // Sort each array
-    const sortedOvernight = overnightCafes.sort((a, b) => b.closingTime - a.closingTime);
-    const sortedRemaining = remainingCafes.sort((a, b) => b.closingTime - a.closingTime);
-
-    // Combinding into a new array
-    const combinedCafes = [
-      ...sortedOvernight,
-      ...midnightCafes,
-      ...sortedRemaining,
-      ...cafesWithoutHours,
-    ];
-
-    setIsLoading(false);
-
-    // Sort the cafes from open latest
-    setCafes(combinedCafes);
-  }
-
-  // Getting overnight details & closing times from Yelp
-  function getDetails(cafesToDetail) {
-    try {
-    // const cafesToDetail = [...undetailedCafes];
-    // const day = new Date().getDay();
-      Promise.all(cafesToDetail.map((cafe) => Yelp.details(cafe.id)
-        .then((cafeDetails) => {
-          const detailedCafe = {
-            ...cafe,
-            // closingTime: twelveHourTime,
-            closingTime: cafeDetails.closingTime,
-            overnight: cafeDetails.overnight,
-          };
-          return detailedCafe;
-        }))).then((detailedCafes) => sortCafes(detailedCafes));
-    } catch (detailError) {
-      setIsLoading(false);
-      console.log(detailError);
-      // setError(detailError);
-    }
-  }
-
-
+  // Seaching the Yelp API for coffee shops near the location
   const searchYelp = (location) => {
     Yelp.search(location).then((cafeList) => {
-      // setCafes(cafeList);
-      getDetails(cafeList);
+      try {
+        // Getting business detail from Yelp for each business
+        getDetails(cafeList)
+          .then((detailedCafes) => sortCafes(detailedCafes))
+          .then((sortedCafes) => {
+            setIsLoading(false);
+            setCafes(sortedCafes);
+          });
+      } catch (detailError) {
+        setIsLoading(false);
+        console.log(detailError);
+      }
     });
-    // For each cafe in cafes
   };
-
 
   return (
     <div className={styles}>
@@ -96,7 +41,8 @@ const App = () => {
       <CafeList
         cafes={cafes}
       />
-      {isLoading ? <LoadingAnimation /> : null}
+      {/* Conditional loading */}
+      {isLoading && <LoadingAnimation />}
     </div>
   );
 };
