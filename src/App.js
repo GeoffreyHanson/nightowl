@@ -17,9 +17,10 @@ const App = () => {
     // Sorting cafes from the latest open
     // const sortedCafes = cafesToSort.sort((a, b) => b.closingTime - a.closingTime);
 
-    const cafesWithoutHours = [];
     const overnightCafes = [];
+    const midnightCafes = [];
     const remainingCafes = [];
+    const cafesWithoutHours = [];
 
     // Pushing to relevent arrays based on criteria
     cafesToSort.forEach((cafe) => {
@@ -27,6 +28,9 @@ const App = () => {
         cafesWithoutHours.push(cafe);
       } else if (cafe.overnight) {
         overnightCafes.push(cafe);
+      } else if (cafe.closingTime < 1) {
+        // Handling shops that close at midnight '0000'
+        midnightCafes.push(cafe);
       } else {
         remainingCafes.push(cafe);
       }
@@ -37,7 +41,12 @@ const App = () => {
     const sortedRemaining = remainingCafes.sort((a, b) => b.closingTime - a.closingTime);
 
     // Combinding into a new array
-    const combinedCafes = [...sortedOvernight, ...sortedRemaining, ...cafesWithoutHours];
+    const combinedCafes = [
+      ...sortedOvernight,
+      ...midnightCafes,
+      ...sortedRemaining,
+      ...cafesWithoutHours,
+    ];
 
     setIsLoading(false);
 
