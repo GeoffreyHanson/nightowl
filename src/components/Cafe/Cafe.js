@@ -1,6 +1,6 @@
 import React from 'react';
 // import Yelp from '../../utilities/Yelp';
-import TimeTranslation from '../../utilities/TimeTranslation';
+import convertTime from '../../utilities/convertTime';
 // import PropTypes from 'prop-types';
 
 // TODO: Destructure props in argument when finalized
@@ -8,7 +8,7 @@ const Cafe = (props) => {
   const { cafe } = props;
   const { name, distance, closingTime } = cafe;
 
-  const formattedClosing = TimeTranslation(closingTime);
+  const formattedClosing = convertTime(closingTime);
 
   // Converting to miles
   const distanceMiles = (distance * 0.000621371);
