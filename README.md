@@ -12,7 +12,7 @@ To be able to quickly find the closest coffee shop nearby without having to dig 
 
 ## Code Style
 
-* Airbnb
+* [Airbnb](https://github.com/airbnb/javascript/tree/master/react)
 
 ## Credits
 
