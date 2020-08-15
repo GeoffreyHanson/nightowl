@@ -1,14 +1,17 @@
 table {
-  /* text-align: center; */
   margin: 0 auto;
   border: solid lightgray;
   padding: 5px;
   border-radius: 20px;
-  width: 500px
+  width: 500px;
 }
 
 td {
   text-align: center;
 }
 
-
+@media only screen and (max-width: 525px) {
+  table {
+    width: 100%;
+  }
+}
