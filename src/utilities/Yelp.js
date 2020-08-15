@@ -1,9 +1,10 @@
 const apiKey = process.env.REACT_APP_YELP_API_KEY;
 const authorization = { headers: { Authorization: `Bearer ${apiKey}` } };
 
-// Search for businesses first, then re-search each business for hours
+// Searching the Yelp REST API
 const Yelp = {
 
+  // Searching for business based on location
   async search(location) {
     const endpoint = `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=coffee&location=${location}&limit=10`;
 
@@ -33,6 +34,7 @@ const Yelp = {
     }
   },
 
+  // Searching for details on businesses based on the current day
   async details(cafeId) {
     const endpoint = `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/${cafeId}`;
     const currentDay = new Date().getDay();
@@ -44,9 +46,16 @@ const Yelp = {
         const jsonResponse = await response.json();
 
         if (jsonResponse.hours) {
-          console.log(currentDay);
-          const dayDetails = jsonResponse.hours[0].open[currentDay];
+          let dayDetails = jsonResponse.hours[0].open[currentDay];
 
+          // Handling closed cafes
+          if (dayDetails === undefined) {
+            dayDetails = {
+              is_overnight: false,
+            };
+          }
+
+          console.log(dayDetails);
           const details = {
             overnight: dayDetails.is_overnight,
             closingTime: dayDetails.end,
