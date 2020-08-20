@@ -25,7 +25,7 @@ module.exports = {
     "rules": {
         'react/jsx-filename-extension': 0,
         "indent": ["error", 2],
-        "jsx-a11y/control-has-associated-label": 0
-        // "global-require": 1,
+        "jsx-a11y/control-has-associated-label": 0,
+        "react/require-default-props": 0,
     }
 };
