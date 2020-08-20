@@ -44,7 +44,6 @@ const Yelp = {
         const jsonResponse = await response.json();
 
         if (jsonResponse.hours) {
-          console.log(currentDay);
           const dayDetails = jsonResponse.hours[0].open[currentDay];
 
           const details = {

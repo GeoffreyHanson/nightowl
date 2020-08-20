@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-// import './SearchBar.module.css';
+import PropTypes from 'prop-types';
 import styles from './SearchBar.module.css';
 
 const SearchBar = ({ searchYelp, setIsLoading }) => {
@@ -31,6 +31,11 @@ const SearchBar = ({ searchYelp, setIsLoading }) => {
       </button>
     </div>
   );
+};
+
+SearchBar.propTypes = {
+  searchYelp: PropTypes.func,
+  setIsLoading: PropTypes.func,
 };
 
 export default SearchBar;
