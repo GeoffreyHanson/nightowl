@@ -4,6 +4,11 @@
   align-items: center;
 }
 
+.SearchForm {
+  display: flex;
+  flex-direction: column;
+}
+
 .LocationInput {
   box-sizing: border-box;
   background-color: #071022;
@@ -22,14 +27,16 @@
   box-sizing: border-box;
   border: 2px solid lightgray;
   padding: 5px;
-  border-radius: 14px;
+  border-radius: 15px;
   font-size: 17px;
-  /* padding: 8px; */
-  /* width: 100px; */
+  align-self: center;
+  width: 75px;
 }
 
 .SubmitButton:hover {
   background-color: #071022;
   color: lightgray;
-  transition-duration: 0.25s;
+  box-shadow: 0 0 5px lightgray;
+  /* transition-duration: 0.25s; */
+  transition: ease-out all 0.25s;
 }
