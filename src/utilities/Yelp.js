@@ -55,7 +55,6 @@ const Yelp = {
             };
           }
 
-          console.log(dayDetails);
           const details = {
             overnight: dayDetails.is_overnight,
             closingTime: dayDetails.end,

@@ -28,6 +28,7 @@ const CafeList = ({ cafes }) => (
 CafeList.propTypes = {
   cafes: PropTypes.arrayOf(
     PropTypes.shape({
+      id: PropTypes.string,
       name: PropTypes.string,
       distance: PropTypes.number,
       closingTime: PropTypes.string,

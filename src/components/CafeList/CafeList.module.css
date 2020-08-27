@@ -4,11 +4,12 @@ table {
   padding: 5px;
   border-radius: 20px;
   width: 500px;
+  font: 'Lora', serif;
 }
 
-td {
+/* td {
   text-align: center;
-}
+} */
 
 @media only screen and (max-width: 525px) {
   table {

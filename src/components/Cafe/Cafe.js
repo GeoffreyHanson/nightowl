@@ -1,9 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import convertTime from '../../utilities/convertTime';
+import './Cafe.module.css';
 
 // TODO: Destructure props in argument when finalized
-const Cafe = ({ cafe: { name, distance, closingTime } }) => {
+const Cafe = ({
+  cafe: {
+    id, name, distance, closingTime,
+  },
+}) => {
+  // Constructing the href for each cafe name.
+  const url = `https://www.yelp.com/biz/${id}`;
+
+  // Converting from 24 hour to 12 hour time.
   const formattedClosing = convertTime(closingTime);
 
   // Converting to miles
@@ -13,10 +22,12 @@ const Cafe = ({ cafe: { name, distance, closingTime } }) => {
 
   return (
     <tr>
-      <td>{name}</td>
       <td>
-        {distanceShortened}
+        <a href={url} target="_blank" rel="noopener noreferrer">
+          {name}
+        </a>
       </td>
+      <td>{distanceShortened}</td>
       <td>{formattedClosing}</td>
     </tr>
   );
@@ -25,6 +36,7 @@ const Cafe = ({ cafe: { name, distance, closingTime } }) => {
 
 Cafe.propTypes = {
   cafe: PropTypes.shape({
+    id: PropTypes.string,
     name: PropTypes.string,
     distance: PropTypes.number,
     closingTime: PropTypes.string,
