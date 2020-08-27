@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styles from './SearchBar.module.css';
 
+// Takes input and passes it to the search util (Yelp.js).
 const SearchBar = ({ searchYelp, setIsLoading }) => {
   const [location, setLocation] = useState('');
 
+  // Triggering animation and search.
   const handleSearch = (event) => {
     setIsLoading(true);
     searchYelp(location);
@@ -13,7 +15,7 @@ const SearchBar = ({ searchYelp, setIsLoading }) => {
 
   return (
     <div className={styles.SearchBar}>
-      <h2>Location</h2>
+      <h2 className={styles.Location}>Location</h2>
       <form
         className={styles.SearchForm}
         onSubmit={handleSearch}
@@ -22,11 +24,9 @@ const SearchBar = ({ searchYelp, setIsLoading }) => {
           className={styles.LocationInput}
           onChange={(event) => setLocation(event.target.value)}
         />
-        {/* <br /> */}
         <button
           className={styles.SubmitButton}
           type="submit"
-          // onClick={handleSearch}
         >
           Search
         </button>

@@ -9,6 +9,10 @@
   flex-direction: column;
 }
 
+.Location {
+  font: 'Lora', serif;
+}
+
 .LocationInput {
   box-sizing: border-box;
   background-color: #071022;
