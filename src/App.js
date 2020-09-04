@@ -15,20 +15,22 @@ const App = () => {
 
   // Seaching the Yelp API for coffee shops near the location
   const searchYelp = (location) => {
-    Yelp.search(location).then((cafeList) => {
-      try {
-        // Getting business detail from Yelp for each business
-        getDetails(cafeList)
-          .then((detailedCafes) => sortCafes(detailedCafes))
-          .then((sortedCafes) => {
-            setIsLoading(false);
-            setCafes(sortedCafes);
-          });
-      } catch (detailError) {
-        setIsLoading(false);
-        console.log(detailError);
-      }
-    });
+    Yelp.gqlsearch(location);
+
+    // Yelp.search(location).then((cafeList) => {
+    //   try {
+    //     // Getting business detail from Yelp for each business
+    //     getDetails(cafeList)
+    //       .then((detailedCafes) => sortCafes(detailedCafes))
+    //       .then((sortedCafes) => {
+    //         setIsLoading(false);
+    //         setCafes(sortedCafes);
+    //       });
+    //   } catch (detailError) {
+    //     setIsLoading(false);
+    //     console.log(detailError);
+    //   }
+    // });
   };
 
   return (

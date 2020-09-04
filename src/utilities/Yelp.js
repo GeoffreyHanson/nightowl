@@ -1,3 +1,6 @@
+import { GraphQLClient, gql } from 'graphql-request';
+// import query from './YelpGQL';
+
 const apiKey = process.env.REACT_APP_YELP_API_KEY;
 const authorization = { headers: { Authorization: `Bearer ${apiKey}` } };
 
@@ -67,6 +70,44 @@ const Yelp = {
       console.log(error);
       throw error;
     }
+  },
+
+  async gqlsearch(location) {
+    const corsProxy = 'https://cors-anywhere.herokuapp.com/';
+    const endpoint = `${corsProxy}https://api.yelp.com/v3/graphql`;
+
+    const graphQLClient = new GraphQLClient(endpoint, {
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        'Content-Type': 'application/graphql',
+        'Accept-Language': 'en-US',
+      },
+    });
+
+    const query = gql`
+    {
+      search (
+        term: "coffee",
+        location: "Minneapolis",
+        limit: 3,
+      ) {
+        business {
+          id
+          name
+          hours {
+            open {
+              is_overnight
+              end
+            }
+          }
+        }
+      }
+    }`;
+
+    const data = await graphQLClient.request(query);
+    const jsonData = await data.json();
+    console.log(jsonData);
+    // return jsonData;
   },
 };
 
