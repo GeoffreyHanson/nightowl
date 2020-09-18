@@ -6,7 +6,7 @@ import styles from './SearchBar.module.css';
 const SearchBar = ({ searchYelp, setIsLoading }) => {
   const [location, setLocation] = useState('');
 
-  // Triggering animation and search.
+  // Triggering loading animation and search.
   const handleSearch = (event) => {
     setIsLoading(true);
     searchYelp(location);
