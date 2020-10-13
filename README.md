@@ -11,6 +11,7 @@ To be able to quickly find the closest coffee shop nearby without having to dig 
 ## Tech used
 
 * React
+* Yelp REST API
 
 ## Code Style
 
